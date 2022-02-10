@@ -1,0 +1,30 @@
+nz-sider {
+    overflow: auto;
+    height: 100%;
+    position: fixed;
+    /* background-color: grey; */
+    left: 0;
+    width: 100px;
+  }
+
+.countdown{
+  padding: 50% 0;
+}
+
+nz-countdown {
+  color:white;
+}
+
+.review{
+  background-color:rgb(66, 184, 221);
+  color:white;
+}
+
+.remove{
+  background-color:red;
+  color:white;
+}
+
+img{
+  border-radius: 15px;
+}

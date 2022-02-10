@@ -1,0 +1,9 @@
+[
+{"type":"header","version":"5.1.0","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"boothcaai1"},
+{"type":"table","name":"dynamic_content","database":"boothcaai1","data":
+[
+{"index_compensation":"$4.00 ","instructions":"Thank you for telling us about yourself! We are testing out a user experience for our research and we want your help. We are looking to understand people&#39;s movie preferences. So we want you to <b>select two (2) movies that you would like to see.<\/b><br \/><br \/>On the next screen you will see many movie posters. There will probably be too many to scroll through them all and it is okay if you do not.<br \/><br \/>There will also be some unfamiliar movies. To help you get a sense for the movies, we have gathered <b>real reviews and recommendations from IMDb.<\/b> We hope you find them useful for making your choices.<br \/><br \/>Your job is to select two movies that you think you would like to watch. Once you have made your selections, hit &#8220;Done&#8220;. Once you have finished, we will send you a link to watch one of the movies you select (as well as a completion code to collect your payment), so <b>please only choose movies you actually want to watch.<\/b>","preconnect":"You will have as much time as you want to select your movies. <br \/>Please do your best to pick carefully","preconnect2":"You will only have 3 minutes to select your movie. <br \/>Please do your best to be quick and pick carefully.","thankyou_code":"6FE9DF21"}
+]
+}
+]

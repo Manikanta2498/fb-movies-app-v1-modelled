@@ -1,0 +1,20 @@
+<div nz-row nzJustify="center" *ngIf="code">
+    <div nz-col nzSpan="20">
+        <nz-result
+            nzStatus="success"
+            nzTitle="Thank you for completing the task!"
+            nzSubTitle=""
+            >
+            <div nz-result-extra>
+                <div *ngIf="movie_flag">
+                    <h2>Here is your completion code: '{{code}}' <i nz-icon nzType="copy" nzTheme="outline" (click)="copyText()"></i></h2>
+                    <br>
+                    <a href={{final_movie}}
+                        target="blank">
+                        <button nz-button nzType="primary" (click)="movie()">Here is the link for your movie<i nz-icon nzType="play-square" nzTheme="outline"></i></button>
+                    </a>
+                </div>
+            </div>
+        </nz-result>
+    </div>
+</div>

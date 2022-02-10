@@ -1,0 +1,108 @@
+<div *ngIf="!names">
+    <div nz-row nzJustify="center" nzAlign="middle">
+        <div nz-col nzSpan="2" style="padding-top: 15%">
+            <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+        </div>
+    </div>
+    <div nz-row nzJustify="center" nzAlign="middle">
+        <div nz-col nzSpan="4" style="padding-top: 1%">
+            <i><h2>Loading Movies</h2></i>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="names">
+    <nz-layout class="layout">
+        <div class="sider">
+            <nz-sider>
+                <div nz-row nzJustify="center" class="countdown" *ngIf="time_choice && deadline">
+                    <nz-countdown 
+                    [nzValue]="deadline" 
+                    [nzTitle]="'Timer 1'"
+                    [nzValueStyle]="{'color': 'white','font-size':'40px'}"
+                    [nzFormat]="'mm:ss:SSS'"
+                    (nzCountdownFinish)="timeup()"
+                    ></nz-countdown>
+                </div>
+                <div nz-row nzJustify="center" class="countdown" *ngIf="!time_choice && deadline">
+                    <nz-countdown 
+                    [nzValue]="deadline" 
+                    [nzTitle]="'Timer 2'"
+                    [nzValueStyle]="{'color': 'white','font-size':'40px'}"
+                    [nzFormat]="'mm:ss'"
+                    (nzCountdownFinish)="timeup()"
+                    ></nz-countdown>
+                </div>
+                <br>
+                <div nz-row nzJustify="center">
+                    <button nz-button nzType="primary" [nzSize]="size" (click)="submit()">Submit<i nz-icon nzType="check"></i></button>
+                </div>
+            </nz-sider>
+        </div>
+        <nz-layout style="margin-left:200px;">
+            <nz-content>
+            <div nz-row nzJustify="center">
+                <div nz-col nzSpan="24" style="padding-top: 1%">
+                    <div nz-row nzJustify="space-around" nzAlign="middle">
+                        <div nz-col nzSpan="8" *ngFor="let movie of movies; let i=index;">
+                            <nz-card>
+                                <div nz-row nzJustify="center">
+                                    <h3 style="margin-left: 10px;margin-top:10px;">{{names[i]['fname']}} {{names[i]['lname']}} <i>recommends</i></h3><br/>
+                                </div>
+                                <div nz-row nzJustify="center" style="height:50px;">
+                                    <strong><h3 style="font-family: Helvetica, sans-serif;"><b>{{movie['title']}}</b></h3></strong>
+                                </div>
+                                <div nz-row nzJustify="center">
+                                    <img src="{{movie['image_url']}}" alt="Smiley face" height="300" width="200">
+                                </div>
+                                <!--<div nz-row nzJustify="center" style="height:40px;">
+                                    <nz-rate [ngModel]="movie['rating']/2" nzAllowHalf></nz-rate>
+                                </div>-->
+                                
+                                <!--<div nz-row nzJustify="center" style="height:40px;">
+                                    <strong><h3 style="font-family: Helvetica, sans-serif;">{{movie['genre']}}</h3></strong>
+                                </div>-->
+                                <div nz-row nzJustify="center" style="padding-top:10px;">
+                                    <button nz-button nzType="default" class="review" (click)="review(i)">Read {{names[i]['fname']}} {{names[i]['lname']}}'s review</button>
+                                </div>
+                                <div nz-row nzJustify="center" style="padding-top:10px;">
+                                    <button nz-button nzType="primary" (click)="add(i)" *ngIf="!movies_selected[i]"><i nz-icon nzType="plus" nzTheme="outline"></i>Add {{names[i]['fname']}} {{names[i]['lname']}}'s Suggestion</button>
+                                    <button nz-button nzType="primary" class="remove" (click)="remove(i)" *ngIf="movies_selected[i]"><i nz-icon nzType="close" nzTheme="outline"></i>Remove from your list</button>
+                                </div>
+                            </nz-card>
+                        </div>
+                    </div>
+                </div>
+                <nz-modal [(nzVisible)]="isVisible" 
+                        nzTitle="{{review_heading}}" 
+                        nzWidth=75%
+                        (nzOnCancel)="handleOk()" 
+                        (nzOnOk)="handleOk()">
+                    <ng-container *nzModalContent>
+                        {{movies[review_index]['review']}}
+                    </ng-container>
+                    <div *nzModalFooter>
+                        <button nz-button nzType="primary" (click)="handleOk()" >OK</button>
+                    </div>
+                </nz-modal>
+            </div>
+            <div nz-row nzJustify="center" style="padding-top:30px;" *ngIf="movies_left">
+                <button nz-button 
+                        nzType="primary" 
+                        style="background-color:green;" 
+                        [nzLoading]="isLoading"
+                        (click)="loadMore()">
+                        {{load_button_text}}
+                        <i nz-icon nzType="plus-circle" nzTheme="outline"></i>
+                </button>
+            </div>
+            <div nz-row nzJustify="center" nzAlign="middle" style="padding-top:30px;" *ngIf="!movies_left">
+                <div nz-col nzSpan="4">
+                    <i><h2>End of Movies!!</h2></i>
+                </div>
+            </div>
+            <br/><br/>
+        </nz-content>
+      </nz-layout>
+    </nz-layout>
+</div>

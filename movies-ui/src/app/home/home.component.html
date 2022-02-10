@@ -1,0 +1,40 @@
+<div *ngIf="!dynamic_content">
+    <div nz-row nzJustify="center" nzAlign="middle">
+        <div nz-col nzSpan="2" style="padding-top: 15%">
+            <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+        </div>
+    </div>
+</div>
+
+<div class="note" *ngIf="dynamic_content">
+    <div nz-row nzJustify="center">
+        <div nz-col nzSpan="22">
+            <nz-card nzTitle="Consent for Participation in Research study">
+                <ul><b>Principal Investigator:</b> Sendhil Mullainathan </ul>
+                <ul><b>Student Researcher:</b> Diag Davenport </ul>
+                <ul><b>IRB Study Number:</b> 21-0412 </ul>
+                <ul><b>DESCRIPTION:</b> We are researchers at the University of Chicago doing a research study on recommendations and social interactions. Participation should take about 10 minutes.
+                        During the study, you will be asked about your online behavior, then you will be shown some online content and we’ll ask you to indicate whether you like the items.</ul>
+                <ul><b>RISKS and BENEFITS:</b> The risks to your participation in this online study are those associated with basic computer tasks, including boredom, fatigue, mild stress, or breach of confidentiality. As with all research, there is a chance that confidentiality of the information we collect from you could be breached. We will take steps to minimize this risk, as discussed in more detail below in this form. All data will be stored on a secure encrypted server in UChicago box. The only benefit to you is the learning experience from participating in a research study. The benefit to society is the contribution to scientific knowledge.</ul>
+                <ul><b>COMPENSATION:</b> Participants will be paid {{dynamic_content['compensation']}} for their time.</ul>
+                <ul><b>CONFIDENTIALITY:</b> We will not be storing or recording any personally identifying information about you that you may have put online. Any reports and presentations about the findings from this study will not include your name or any other information that could identify you. We may share the data we collect in this study with other researchers doing future studies. If we share your data, we will not include information that could identify you.</ul>
+                <ul><b>SUBJECT’S RIGHTS:</b> Your participation is voluntary. You may stop participating at any time by closing the browser window or the program to withdraw from this study. Partial data will not be analyzed. For additional questions about this research, you may contact: Diag Davenport at diag@uchicago.edu.</ul>
+                <ul>For questions about your rights as a research participant, you may contact:</ul>
+                <ul style="padding-left:50px;"><b><i>Social & Behavioral Sciences Institutional Review Board</i> </b></ul>
+                <ul style="padding-left:50px;"><b><i>University of Chicago 1155 E. 60th Street, Room 418 Chicago, IL 60637 Phone: (773) 834-7835 Email: sbs-irb@uchicago.edu</i></b></ul>
+                <ul><label nz-checkbox [(ngModel)]="checkbox_checked">
+                    Please indicate, in the checkbox, that you are at least 18 years old, have read and understand this consent form, and you agree to participate in this online research study.
+                </label></ul>
+            </nz-card>
+        </div>
+    </div>
+    <br>
+    <div nz-row nzJustify="center" *ngIf="checkbox_checked">
+        <div nz-col nzSpan="20">
+            <div nz-row class="btn">
+                <button nz-button nzType="primary" (click)="instructions()">Continue<i nz-icon nzType="right"></i></button>
+            </div>
+        </div>
+    </div>
+    <div style="padding-top: 20px"></div>
+</div>

@@ -1,0 +1,139 @@
+<div *ngIf="!instructions">
+    <div nz-row nzJustify="center">
+        <div nz-col nzSpan="22">
+            <nz-card nzTitle="PLEASE ANSWER THE FOLLOWING QUESTIONS CAREFULLY">
+                <div nz-row nzJustify="center">
+                    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+                        <nz-form-item>
+                            <nz-form-label nzFor="race" nzRequired>Please indicate your race/ethnicity</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzErrorTip="Please select your race!">
+                            <nz-select
+                                id="race"
+                                formControlName="race"
+                                nzMode="multiple"
+                                nzPlaceHolder="Select your race">
+                                <nz-option nzValue="American Indian or Alaska Native" nzLabel="American Indian or Alaska Native"></nz-option>
+                                <nz-option nzValue="Asian" nzLabel="Asian"></nz-option>
+                                <nz-option nzValue="Black" nzLabel="Black"></nz-option>
+                                <nz-option nzValue="Hispanic" nzLabel="Hispanic"></nz-option>
+                                <nz-option nzValue="White" nzLabel="White"></nz-option>
+                                <nz-option nzValue="Native Hawaiian or Pacific Islander" nzLabel="Native Hawaiian or Pacific Islander"></nz-option>
+                                <nz-option nzValue="Other" nzLabel="Other"></nz-option>
+                            </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label nzFor="gender" nzRequired>How would you describe your gender?</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzErrorTip="Please select your gender!">
+                            <nz-select
+                                id="gender"
+                                formControlName="gender"
+                                nzPlaceHolder="Gender">
+                                <nz-option nzValue="Male" nzLabel="Male"></nz-option>
+                                <nz-option nzValue="Female" nzLabel="Female"></nz-option>
+                                <nz-option nzValue="Non Binary" nzLabel="Non Binary"></nz-option>
+                            </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label nzFor="age" nzRequired>How old are you?</nz-form-label>
+                            <nz-form-control [nzSpan]="18" nzErrorTip="Only above age 18 and below 80 are allowed!">
+                            <input id="age" type="text" nz-input formControlName="age" />
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label nzFor="study" nzRequired>Please select your highest completed level of education</nz-form-label>
+                            <nz-form-control [nzSpan]="18" nzErrorTip="Please select your education level!">
+                            <nz-select
+                                id="study"
+                                formControlName="study"
+                                nzPlaceHolder="Education level">
+                                <nz-option nzValue="Did not graduate high school" nzLabel="Did not graduate high school"></nz-option>
+                                <nz-option nzValue="Graduated high school" nzLabel="Graduated high school"></nz-option>
+                                <nz-option nzValue="Some college, no degree" nzLabel="Some college, no degree"></nz-option>
+                                <nz-option nzValue="Associate degree" nzLabel="Associate's degree"></nz-option>
+                                <nz-option nzValue="Bachelor degree" nzLabel="Bachelor's degree"></nz-option>
+                                <nz-option nzValue="Master degree" nzLabel="Master's degree"></nz-option>
+                                <nz-option nzValue="Professional degree" nzLabel="Professional degree"></nz-option>
+                                <nz-option nzValue="Doctoral degree" nzLabel="Doctoral degree"></nz-option>
+                            </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label nzFor="frequency" nzRequired>How often do you watch movies?</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzErrorTip="Please select one!">
+                            <nz-select
+                                id="frequency"
+                                formControlName="frequency">
+                                <nz-option nzValue="Every day" nzLabel="Every day"></nz-option>
+                                <nz-option nzValue="Several times a week" nzLabel="Several times a week"></nz-option>
+                                <nz-option nzValue="Several times a month" nzLabel="Several times a month"></nz-option>
+                                <nz-option nzValue="Once a month" nzLabel="Once a month"></nz-option>
+                                <nz-option nzValue="A few times a year" nzLabel="A few times a year"></nz-option>
+                                <nz-option nzValue="Once a year" nzLabel="Once a year"></nz-option>
+                                <nz-option nzValue="Never" nzLabel="Never"></nz-option>
+                            </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label nzFor="genre" nzRequired>What is your favourite movie genre?</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzErrorTip="Please select your fav genre!">
+                            <nz-select
+                                id="genre"
+                                formControlName="genre">
+                                <nz-option nzValue="Action and adventure" nzLabel="Action and adventure"></nz-option>
+                                <nz-option nzValue="Animation" nzLabel="Animation"></nz-option>
+                                <nz-option nzValue="Comedy" nzLabel="Comedy"></nz-option>
+                                <nz-option nzValue="Drama" nzLabel="Drama"></nz-option>
+                                <nz-option nzValue="Historical" nzLabel="Historical"></nz-option>
+                                <nz-option nzValue="Horror" nzLabel="Horror"></nz-option>
+                                <nz-option nzValue="Science Fiction" nzLabel="Science Fiction"></nz-option>
+                                <nz-option nzValue="Other" nzLabel="Other"></nz-option>
+                            </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <!--<p>We need to know how you usually access the internet. In this case, however, we want to check that people take the time they need to read the instructions. To show that you’ve read carefully, please ignore the question below and simply select the response category "I do not have access to the internet" to move on to the next question.</p>
+                        <nz-form-item>
+                            <nz-form-label nzFor="internet" nzRequired>How do you usually access the internet?</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzErrorTip="Please select your choice!">
+                            <nz-select
+                                id="internet"
+                                formControlName="internet">
+                                <nz-option nzValue="1" nzLabel="I use my smartphone"></nz-option>
+                                <nz-option nzValue="2" nzLabel="I use my Computer"></nz-option>
+                                <nz-option nzValue="3" nzLabel="I use a communal/public device"></nz-option>
+                                <nz-option nzValue="4" nzLabel="I do not have access to the internet"></nz-option>
+                            </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>-->
+                        <nz-form-item>
+                            <nz-form-control>
+                                <button nz-button nzType="primary">Submit<i nz-icon nzType="right"></i></button>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </form>
+                </div>
+            </nz-card>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="instructions && dynamic_content">
+    <div nz-row nzJustify="center">
+        <div nz-col nzSpan="22">
+            <nz-card nzTitle="Instructions">
+                <div style="padding-left:20%;" [innerHTML]="dynamic_instructions"></div>
+            </nz-card>
+        </div>
+    </div>
+    <br>
+    <div nz-row nzJustify="center">
+        <div nz-col nzSpan="20">
+            <div nz-row class="btn">
+                <button nz-button nzType="primary" (click)="confirm()">Continue<i nz-icon nzType="right"></i></button>
+            </div>
+        </div>
+    </div>
+    <div style="padding-top: 20px"></div>
+</div>
+

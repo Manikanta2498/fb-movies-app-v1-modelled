@@ -1,0 +1,54 @@
+<div>
+    <div nz-row nzJustify="center">
+        <div nz-col nzSpan="22">
+            <nz-card nzTitle="PLEASE SHARE YOUR FEEDBACK">
+                <div nz-row nzJustify="center">
+                    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+                        <nz-form-item>
+                            <nz-form-label nzFor="rate" nzRequired>HOW WOULD YOU RATE THE SELECTION OF MOVIES AVAILABLE TO YOU?</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzErrorTip="Please select your choice!">
+                            <nz-rate id="rate" formControlName="rate" [nzCount]="7" [nzTooltips]="tooltips"></nz-rate>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label nzFor="satisfied" nzRequired>HOW SATISFIED WERE YOU WITH THE MOVIES YOU CHOSE?</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzErrorTip="Please select your choice!">
+                            <nz-rate id="satisfied" formControlName="satisfied" [nzCount]="7" [nzTooltips]="tooltips"></nz-rate>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label nzFor="rely" nzRequired>HOW MUCH DID YOU RELY ON THE RECOMMENDATION TO MAKE YOUR CHOICES?</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzErrorTip="Please select your choice!">
+                            <nz-rate id="rely" formControlName="rely" [nzCount]="7" [nzTooltips]="tooltips"></nz-rate>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label nzFor="likely" nzRequired>HOW LIKELY ARE YOU TO USE YOUR EARNINGS TO RENT THE MOVIE?</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzErrorTip="Please select your choice!">
+                            <nz-rate id="likely" formControlName="likely" [nzCount]="7" [nzTooltips]="tooltips"></nz-rate>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label nzFor="study" nzRequired>WHAT DO YOU THINK THIS STUDY IS ABOUT?</nz-form-label>
+                            <nz-form-control [nzSpan]="18" nzErrorTip="Please enter your text">
+                                <textarea rows="4" nz-input id="study" formControlName="study" ></textarea>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label nzFor="share" nzRequired>ANYTHING ELSE YOU’D LIKE TO SHARE WITH US?</nz-form-label>
+                            <nz-form-control [nzSpan]="18" nzErrorTip="Please enter your text">
+                                <textarea rows="4" nz-input id="share" formControlName="share" ></textarea>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item>
+                            <nz-form-control>
+                                <button nz-button nzType="primary">Submit<i nz-icon nzType="right"></i></button>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </form>
+                </div>
+            </nz-card>
+        </div>
+    </div>
+</div>
