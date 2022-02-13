@@ -43,6 +43,7 @@ class User(models.Model):
     user_genre = models.CharField(max_length=200,null=True)
     user_race = models.CharField(max_length=200,null=True)
     test_type = models.IntegerField(null=True)
+    sorting = models.CharField(max_length=100,null=True)
     user_entry_time = models.DateTimeField()
     time_spent = models.CharField(max_length=200,null=True)
     feedback_rate = models.IntegerField(null=True)

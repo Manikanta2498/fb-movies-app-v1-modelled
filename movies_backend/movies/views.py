@@ -154,8 +154,10 @@ def postNewUser(data):
             user_entry_time = info["user_entry_time"],
         )
         timed = 1 if info["time_choice"] == True else 0
+        sorting = "algorithm" if info["time_choice"] == True else "random"
         user = User.objects.get(user_id=info["user_id"])
         user.test_type = timed
+        user.sorting = sorting
         user.save()
         return JsonResponse('Post Info Success',safe=False)
     except Exception as e:
@@ -259,35 +261,46 @@ def createUserMovieNamePattern(id,timed):
         user = model_to_dict(User.objects.get(user_id=id))
         movies = [model_to_dict(Movie.objects.get(id=movie_id+206)) for movie_id in randomMovieslist]
         
-        predictions = []
-        for i in range(len(movies)):
-            movie = movies[i]
-            recommender = namesList[i]
-            genre_match = 1 if user['user_genre'] in movie['genre'] else 0
-            edu = eduMap[user['user_education']]
-            
-            model_result = model.predict({
-                "user_age": user['user_age'],
-                "clean_edu" : edu,
-                "user_frequency" : user['user_frequency'],
-                "user_genre" : user['user_genre'],
-                "genre.match" : genre_match,
-                "rating.y" : movie['rating'],
-                "rec_gender" : recommender['gender'],
-                "rec_race" : recommender['race'].capitalize()
-            })
-            predictions.append(model_result['predicted_clicked'])
-            
-        moviesListModelled = [x for _,x in sorted(zip(predictions,randomMovieslist),reverse=True)]
-    
-        user_instance = UserPattern.objects.create(
-            user_id = id,
-            user_movies_pattern = str(moviesListModelled),
-            user_names_pattern = str(namesList),
-            user_faces_pattern = str(image_sets),
-            movie_index = 0,
-            names_index = 0,
-        )
+        if timed == 1:
+            predictions = []
+            for i in range(len(movies)):
+                movie = movies[i]
+                recommender = namesList[i]
+                genre_match = 1 if user['user_genre'] in movie['genre'] else 0
+                edu = eduMap[user['user_education']]
+                
+                model_result = model.predict({
+                    "user_age": user['user_age'],
+                    "clean_edu" : edu,
+                    "user_frequency" : user['user_frequency'],
+                    "user_genre" : user['user_genre'],
+                    "genre.match" : genre_match,
+                    "rating.y" : movie['rating'],
+                    "rec_gender" : recommender['gender'],
+                    "rec_race" : recommender['race'].capitalize()
+                })
+                predictions.append(model_result['predicted_clicked'])
+                
+            moviesListModelled = [x for _,x in sorted(zip(predictions,randomMovieslist),reverse=True)]
+        
+            user_instance = UserPattern.objects.create(
+                user_id = id,
+                user_movies_pattern = str(moviesListModelled),
+                user_names_pattern = str(namesList),
+                user_faces_pattern = str(image_sets),
+                movie_index = 0,
+                names_index = 0,
+            )
+        else:
+            user_instance = UserPattern.objects.create(
+                user_id = id,
+                user_movies_pattern = str(randomMovieslist),
+                user_names_pattern = str(namesList),
+                user_faces_pattern = str(image_sets),
+                movie_index = 0,
+                names_index = 0,
+            )
+        
         print('User created')
     except Exception as e:
         print(e)
