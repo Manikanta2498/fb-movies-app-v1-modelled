@@ -282,11 +282,12 @@ def createUserMovieNamePattern(id,timed):
                 predictions.append(model_result['predicted_clicked'])
                 
             moviesListModelled = [x for _,x in sorted(zip(predictions,randomMovieslist),reverse=True)]
+            namesListModelled = [x for _,x in sorted(zip(predictions,namesList),reverse=True)]
         
             user_instance = UserPattern.objects.create(
                 user_id = id,
                 user_movies_pattern = str(moviesListModelled),
-                user_names_pattern = str(namesList),
+                user_names_pattern = str(namesListModelled),
                 user_faces_pattern = str(image_sets),
                 movie_index = 0,
                 names_index = 0,
