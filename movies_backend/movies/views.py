@@ -1,3 +1,4 @@
+from unicodedata import name
 from django.http import HttpResponse
 from django.http import response
 from django.http.response import JsonResponse
@@ -257,6 +258,7 @@ def createUserMovieNamePattern(id,timed):
         for i in range(int(movies_count*raceProbabilities['Asian']/100)):
             namesList.append(asianNames[i])
         random.shuffle(namesList)
+        namesList = namesList[:movies_count]
         image_sets = [] #createFacesPattern(namesList)
         user = model_to_dict(User.objects.get(user_id=id))
         movies = [model_to_dict(Movie.objects.get(id=movie_id+206)) for movie_id in randomMovieslist]
@@ -282,8 +284,16 @@ def createUserMovieNamePattern(id,timed):
                 predictions.append(model_result['predicted_clicked'])
                 
             moviesListModelled = [x for _,x in sorted(zip(predictions,randomMovieslist),reverse=True)]
-            namesListModelled = [x for _,x in sorted(zip(predictions,namesList),reverse=True)]
-        
+            names = [x['fname']+','+x['lname'] for x in namesList]
+            newList = [x for _,x in sorted(zip(predictions,names),reverse=True)]
+            namesListModelled = []
+            for n in newList:
+                fname,lname= n.split(',')
+                for name in namesList:
+                    if name['fname'] == fname and name['lname'] == lname:
+                        namesListModelled.append(name)
+                        break
+            
             user_instance = UserPattern.objects.create(
                 user_id = id,
                 user_movies_pattern = str(moviesListModelled),
