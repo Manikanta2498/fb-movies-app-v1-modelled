@@ -26,5 +26,6 @@ urlpatterns = [
     url(r'^createlnames/',views.createLnames),
     url(r'^createmovies/',views.createMovies),
     url(r'^createupdatedmovies/',views.createUpdatedMovies),
+    url(r'testmodel',views.testModel),
     url(r'^.*$', RedirectView.as_view(url='/', permanent=False), name='index')
 ]

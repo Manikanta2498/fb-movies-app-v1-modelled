@@ -13,6 +13,7 @@ from os.path import isfile, join
 import pandas as pd 
 from pypmml import Model
 import time
+import csv
 
 IPs = []
 
@@ -27,17 +28,6 @@ eduMap = {
     "Professional degree" : "more.than.bachelors",
     "Doctoral degree" : "more.than.bachelors"
 }
-
-result = model.predict({
-    "user_age": 20,
-    "clean_edu" : "more.than.bachelors",
-    "user_frequency" : "Once a month",
-    "user_genre" : "Comedy",
-    "genre.match" : 1,
-    "rating.y" : 10,
-    "rec_gender" : "Male",
-    "rec_race" : "Black"
-})
 
 # Local
 # images_path = "M:/MS_STUDY/RA/MOVIE/selected gan faces/"
@@ -249,16 +239,61 @@ def createUserMovieNamePattern(id,timed):
         random.shuffle(hispanicNames)
         random.shuffle(blackNames)
         random.shuffle(asianNames)
-        for i in range(int(movies_count*raceProbabilities['White']/100)+1):
-            namesList.append(whiteNames[i])
-        for i in range(int(movies_count*raceProbabilities['Hispanic']/100)+1):
-            namesList.append(hispanicNames[i])
-        for i in range(int(movies_count*raceProbabilities['Black']/100)+1):
-            namesList.append(blackNames[i])
-        for i in range(int(movies_count*raceProbabilities['Asian']/100)):
-            namesList.append(asianNames[i])
+        whiteNamesMale = []
+        whiteNamesFemale = []
+        hispanicNamesMale = []
+        hispanicNamesFemale = []
+        blackNamesMale = []
+        blackNamesFemale = []
+        asianNamesMale = []
+        asianNamesFemale = []
+        for name in whiteNames:
+            if name['gender'] == 'Male':
+                whiteNamesMale.append(name)
+            else:
+                whiteNamesFemale.append(name)
+                
+        for name in hispanicNames:
+            if name['gender'] == 'Male':
+                hispanicNamesMale.append(name)
+            else:
+                hispanicNamesFemale.append(name)
+                
+        for name in blackNames:
+            if name['gender'] == 'Male':
+                blackNamesMale.append(name)
+            else:
+                blackNamesFemale.append(name)
+        
+        for name in asianNames:
+            if name['gender'] == 'Male':
+                asianNamesMale.append(name)
+            else:
+                asianNamesFemale.append(name)
+        whiteNamesCount = int(movies_count*raceProbabilities['White']/100+1)
+        hispanicNamesCount = int(movies_count*raceProbabilities['Hispanic']/100+1)
+        blackNamesCount = int(movies_count*raceProbabilities['Black']/100+1)
+        asianNamesCount = int(movies_count*raceProbabilities['Asian']/100)
+        for i in range(whiteNamesCount//2):
+            namesList.append(whiteNamesMale[i])
+        for i in range(whiteNamesCount - whiteNamesCount//2):
+            namesList.append(whiteNamesFemale[i])
+        for i in range(hispanicNamesCount//2):
+            namesList.append(hispanicNamesMale[i])
+        for i in range(hispanicNamesCount - hispanicNamesCount//2):
+            namesList.append(hispanicNamesFemale[i])
+        for i in range(blackNamesCount//2):
+            namesList.append(blackNamesMale[i])
+        for i in range(blackNamesCount - blackNamesCount//2):
+            namesList.append(blackNamesFemale[i])
+        for i in range(asianNamesCount//2):
+            namesList.append(asianNamesMale[i])
+        for i in range(asianNamesCount - asianNamesCount//2):
+            namesList.append(asianNamesFemale[i])
+   
         random.shuffle(namesList)
         namesList = namesList[:movies_count]
+        print(namesList)
         image_sets = [] #createFacesPattern(namesList)
         user = model_to_dict(User.objects.get(user_id=id))
         movies = [model_to_dict(Movie.objects.get(id=movie_id+206)) for movie_id in randomMovieslist]
@@ -462,3 +497,57 @@ def createUpdatedMovies(request):
     except ValueError as e:
         print("----Error----")
         return response(e.args[0])
+    
+@api_view(["GET"])
+def testModel(request):
+    predictions1 = []
+    predictions2 = []
+
+    randomMovieslist = [6, 35, 41, 25, 30, 10, 7, 42, 39, 16, 24, 21, 11, 19, 37, 33, 5, 32, 4, 27, 8, 9, 15, 38, 12, 23, 3, 17, 13, 22, 28, 31, 14, 20, 34, 1, 2, 26, 36, 29, 18, 40]
+    namesList = [{'fname': 'Jay', 'lname': 'M', 'race': 'white', 'gender': 'Male'}, {'fname': 'Terell', 'lname': 'J', 'race': 'black', 'gender': 'Male'}, {'fname': 'Geoffrey', 'lname': 'K', 'race': 'white', 'gender': 'Male'}, {'fname': 'Emily', 'lname': 'S', 'race': 'white', 'gender': 'Female'}, {'fname': 'Juanita', 'lname': 'R', 'race': 'hispanic', 'gender': 'Female'}, {'fname': 'Juanita', 'lname': 'M', 'race': 'hispanic', 'gender': 'Female'}, {'fname': 'Tyler', 'lname': 'S', 'race': 'white', 'gender': 'Male'}, {'fname': 'Cody', 'lname': 'H', 'race': 'white', 'gender': 'Male'}, {'fname': 'Scott', 'lname': 'S', 'race': 'white', 'gender': 'Male'}, {'fname': 'Claire', 'lname': 'R', 'race': 'white', 'gender': 'Female'}, {'fname': 'Gabriella', 'lname': 'L', 'race': 'hispanic', 'gender': 'Female'}, {'fname': 'Jay', 'lname': 'S', 'race': 'white', 'gender': 'Male'}, {'fname': 'Carlos', 'lname': 'M', 'race': 'hispanic', 'gender': 'Male'}, {'fname': 'Juan', 'lname': 'R', 'race': 'hispanic', 'gender': 'Male'}, {'fname': 'Greg', 'lname': 'E', 'race': 'white', 'gender': 'Male'}, {'fname': 'Reginald', 'lname': 'J', 'race': 'black', 'gender': 'Male'}, {'fname': 'Thomas', 'lname': 'H', 'race': 'white', 'gender': 'Male'}, {'fname': 'Anne', 'lname': 'S', 'race': 'white', 'gender': 'Female'}, {'fname': 'Matthew', 'lname': 'F', 'race': 'white', 'gender': 'Male'}, {'fname': 'Matthew', 'lname': 'A', 'race': 'white', 'gender': 'Male'}, {'fname': 'Hakim', 'lname': 'J', 'race': 'black', 'gender': 'Male'}, {'fname': 'Cody', 'lname': 'S', 'race': 'white', 'gender': 'Male'}, {'fname': 'Emily', 'lname': 'F', 'race': 'white', 'gender': 'Female'}, {'fname': 'Cody', 'lname': 'S', 'race': 'white', 'gender': 'Male'}, {'fname': 'Carrie', 'lname': 'A', 'race': 'white', 'gender': 'Female'}, {'fname': 'Carlos', 'lname': 'G', 'race': 'hispanic', 'gender': 'Male'}, {'fname': 'Juan', 'lname': 'L', 'race': 'hispanic', 'gender': 'Male'}, {'fname': 'Emily', 'lname': 'R', 'race': 'white', 'gender': 'Female'}, {'fname': 'Daquan', 'lname': 'F', 'race': 'black', 'gender': 'Male'}, {'fname': 'Gabriella', 'lname': 'R', 'race': 'hispanic', 'gender': 'Female'}, {'fname': 'Matthew', 'lname': 'S', 'race': 'white', 'gender': 'Male'}, {'fname': 'Douglas', 'lname': 'W', 'race': 'white', 'gender': 'Male'}, {'fname': 'Jacob', 'lname': 'A', 'race': 'white', 'gender': 'Male'}, {'fname': 'Gabriella', 'lname': 'M', 'race': 'hispanic', 'gender': 'Female'}, {'fname': 'Allison', 'lname': 'O', 'race': 'white', 'gender': 'Female'}, {'fname': 'Claire', 'lname': 'S', 'race': 'white', 'gender': 'Female'}, {'fname': 'Tyrone', 'lname': 'R', 'race': 'black', 'gender': 'Male'}, {'fname': 'Carlos', 'lname': 'R', 'race': 'hispanic', 'gender': 'Male'}, {'fname': 'Greg', 'lname': 'S', 'race': 'white', 'gender': 'Male'}, {'fname': 'Jill', 'lname': 'M', 'race': 'white', 'gender': 'Female'}, {'fname': 'Tyler', 'lname': 'R', 'race': 'white', 'gender': 'Male'}, {'fname': 'Douglas', 'lname': 'W', 'race': 'white', 'gender': 'Male'}, {'fname': 'Malcolm', 'lname': 'P', 'race': 'black', 'gender': 'Male'}]
+    movies = [model_to_dict(Movie.objects.get(id=movie_id+206)) for movie_id in randomMovieslist]
+    movie_names = [movie['title'] for movie in movies]
+    
+    fields = ['fname', 'lname', 'race', 'gender', 'movie_title', 'movie_rating', 'prediction'] 
+    filename = "model_output.csv"
+    mydict = []
+    
+    for i in range(len(movies)):
+        movie = movies[i]
+        recommender = namesList[i]
+        genre_match = 1 if "Other" in movie['genre'] else 0
+        # edu = eduMap[user['user_education']]
+        
+        model_result = model.predict({
+            "user_age": 27,
+            "clean_edu" : "bachelors",
+            "user_frequency" : "Several times a month",
+            "user_genre" : "Other",
+            "genre.match" : genre_match,
+            "rating.y" : movie['rating'],
+            "rec_gender" : recommender['gender'],
+            "rec_race" : recommender['race'].capitalize()
+        })
+        predictions1.append(model_result['predicted_clicked'])
+        mydict.append({'fname': recommender['fname'], 'lname': recommender['lname'],'race':recommender['race'],
+                       'gender': recommender['gender'], 'movie_title': movie['title'],
+                       'movie_rating': movie['rating'], 'prediction': model_result['predicted_clicked']})
+            
+    moviesListModelled = [x for _,x in sorted(zip(predictions1,randomMovieslist),reverse=True)]
+    names = [x['fname']+','+x['lname'] for x in namesList]
+    newList = [x for _,x in sorted(zip(predictions1,names),reverse=True)]
+    namesListModelled = []
+    for n in newList:
+        fname,lname= n.split(',')
+        for name in namesList:
+            if name['fname'] == fname and name['lname'] == lname:
+                namesListModelled.append(name)
+                break
+    with open(filename, 'w') as csvfile: 
+        writer = csv.DictWriter(csvfile, fieldnames = fields) 
+        writer.writeheader() 
+        writer.writerows(mydict) 
+        
+    new_movies = [model_to_dict(Movie.objects.get(id=movie_id+206)) for movie_id in moviesListModelled]
+    new_movie_names = [movie['title'] for movie in new_movies]
+    return JsonResponse([predictions1, new_movie_names, namesListModelled], safe=False)

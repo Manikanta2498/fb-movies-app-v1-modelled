@@ -1,0 +1,43 @@
+fname,lname,race,gender,movie_title,movie_rating,prediction
+Jay,M,white,Male,Coming 2 America,8,0.05593948497606469
+Terell,J,black,Male,Take Shelter,10,0.05951263462315133
+Geoffrey,K,white,Male,The Terminal,8,0.05593948497606469
+Emily,S,white,Female,Not Another Teen Movie,8,0.04793852821124187
+Juanita,R,hispanic,Female,Return to Snowy River (1988),8,0.0407574092101869
+Juanita,M,hispanic,Female,Fast Times at Ridgemont High,8,0.0407574092101869
+Tyler,S,white,Male,Cryptozoo,10,0.064073614887309
+Cody,H,white,Male,Val,10,0.064073614887309
+Scott,S,white,Male,The Saint,10,0.064073614887309
+Claire,R,white,Female,Hook,10,0.057738561134061776
+Gabriella,L,hispanic,Female,No Man of God,7,0.03480098485608447
+Jay,S,white,Male,Minority Report,10,0.064073614887309
+Carlos,M,hispanic,Male,Finding You,9,0.055896723814067704
+Juan,R,hispanic,Male,Leave No Trace,10,0.05915535289318628
+Greg,E,white,Male,The East,9,0.06568009986843959
+Reginald,J,black,Male,Snatch,10,0.05951263462315133
+Thomas,H,white,Male,BASEketball (1998),10,0.064073614887309
+Anne,S,white,Female,She's Out of My League,9,0.05186924761566595
+Matthew,F,white,Male,Bait (2000),7,0.04895062584167213
+Matthew,A,white,Male,Out of Time,8,0.05593948497606469
+Hakim,J,black,Male,Evangelion: 1.0 You Are (Not) Alone,10,0.05951263462315133
+Cody,S,white,Male,Evangelion: 3.0+1.01 Thrice Upon a Time,10,0.064073614887309
+Emily,F,white,Female,Heathers,10,0.057738561134061776
+Cody,S,white,Male,The Misfits,9,0.06568009986843959
+Carrie,A,white,Female,Green Lantern,9,0.05186924761566595
+Carlos,G,hispanic,Male,My Heart Can't Beat Unless You Tell It To,8,0.0446865151772231
+Juan,L,hispanic,Male,Attack the Block,8,0.0446865151772231
+Emily,R,white,Female,Knowing,9,0.05186924761566595
+Daquan,F,black,Male,Guns Akimbo,8,0.050404386930681076
+Gabriella,R,hispanic,Female,Mr. Blandings Builds His Dream House (1948),8,0.0407574092101869
+Matthew,S,white,Male,Predator,9,0.06568009986843959
+Douglas,W,white,Male,Rogue Hostage,9,0.06568009986843959
+Jacob,A,white,Male,Habit,10,0.064073614887309
+Gabriella,M,hispanic,Female,Major Payne,9,0.05188872858328981
+Allison,O,white,Female,Soapdish (1991),10,0.057738561134061776
+Claire,S,white,Female,Aliens,9,0.05186924761566595
+Tyrone,R,black,Male,Apocalypto,9,0.05577668553353767
+Carlos,R,hispanic,Male,Occupation: Rainfall,8,0.0446865151772231
+Greg,S,white,Male,The Abyss,8,0.05593948497606469
+Jill,M,white,Female,Queen Bees,8,0.04793852821124187
+Tyler,R,white,Male,Lansky,8,0.05593948497606469
+Douglas,W,white,Male,The Shop Around the Corner (1940),10,0.064073614887309
